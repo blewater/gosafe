@@ -1,5 +1,8 @@
 build:
-	go build
+	go build -o build
+
+run:
+	go run main.go
 
 clean:
 	go clean
