@@ -1,0 +1,1 @@
+docker exec -it dev-geth geth attach ipc:/tmp/geth.ipc
