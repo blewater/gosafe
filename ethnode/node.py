@@ -1,6 +1,18 @@
 #!/usr/bin/env python3
 from web3 import Web3, HTTPProvider
 
+ETHER_TRANSFER = 10000
+
+
+def disp_ether_balance(address_str: str) -> float:
+    # Get the balance of the default account
+    bal_in_wei = w3.eth.get_balance(Web3.to_checksum_address(address_str))
+    # Get the balance of the default account in ether
+    balance_ether = w3.from_wei(bal_in_wei, 'ether')
+    print('balance for', address_str, ' in ether:', balance_ether)
+    return bal_in_wei
+
+
 # Initialize Web3 with the Geth node HTTP provider
 w3 = Web3(HTTPProvider('http://127.0.0.1:8545'))
 
@@ -14,13 +26,6 @@ w3.eth.defaultAccount = w3.eth.accounts[0]
 
 # Print default account
 print('Default account:', w3.eth.defaultAccount)
-
-# Get the balance of the default account
-balance = w3.eth.get_balance(w3.eth.defaultAccount)
-
-# Get the balance of the default account in ether
-balance_ether = w3.from_wei(balance, 'ether')
-print('Balance in ether:', balance_ether)
 
 # Reading the encrypted key from the keystore file
 keystore_path = '/Users/mar/.ethereum/keystore/UTC--2023-11-11T19-57-37.248094917Z' \
