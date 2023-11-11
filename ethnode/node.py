@@ -39,3 +39,31 @@ try:
     print('Private key:', private_key.hex())
 except ValueError as e:
     print("Error decrypting key:", e)
+
+coinbase = w3.eth.defaultAccount
+balance = disp_ether_balance(coinbase)
+
+# Specify the recipient address and amount to transfer
+recipient_address = "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+amount_to_send = w3.to_wei(ETHER_TRANSFER, 'ether')
+
+# Check if the balance is sufficient
+if balance < amount_to_send:
+    print("Insufficient balance to send the transaction")
+    exit()
+
+# Create and send the transaction
+tx_hash = w3.eth.send_transaction({
+    'to': recipient_address,
+    'from': w3.eth.defaultAccount,
+    'value': amount_to_send
+})
+
+# Wait for the transaction to be mined
+tx_receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
+
+print('Transfer successful with hash:', tx_receipt.transactionHash.hex())
+
+# Check the balance of the recipient
+disp_ether_balance(w3.eth.defaultAccount)
+disp_ether_balance(recipient_address)
