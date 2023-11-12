@@ -31,7 +31,7 @@ build-contracts:
 	cd contracts && npx hardhat compile
 
 deploy-contracts:
-	cd contracts && npx hardhat --network anvil deploy
+	cd contracts && npx hardhat --network dev_geth deploy
 # "SimulateTxAccessor" at 0x59AD6735bCd8152B84860Cb256dD9e96b85F69Da
 # "GnosisSafeProxyFactory" at 0xa6B71E26C5e0845f74c812102Ca7114b6a896AB2
 # "DefaultCallbackHandler" at 0x1AC114C2099aFAf5261731655Dc6c306bFcd4Dbd
@@ -43,4 +43,4 @@ deploy-contracts:
 # "GnosisSafeL2" at 0x3E5c63644E683549055b9Be8653de26E0B4CD36E
 # "GnosisSafe" at 0xd9Db270c1B5E3Bd161E8c8503c55cEABeE709552
 
-.PHONY: build init-submodules update-submodules pull-all
+.PHONY: build init-submodules update-submodules pull-all init-contracts test-contracts build-contracts deploy-contracts
